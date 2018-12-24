@@ -12,4 +12,4 @@
 
 <h3>빌드 방법</h3>
 
-  - 프로젝트는 FileZilla FTP를 이용하여 WAR 파일을 EC2 웹서버에 올렸습니다.
+  - 프로젝트는 FileZilla FTP를 이용하여 EC2 웹서버에 올렸습니다.
