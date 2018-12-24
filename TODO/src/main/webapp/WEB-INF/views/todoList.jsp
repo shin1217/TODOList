@@ -119,6 +119,12 @@
 	$(document).ready(function() {
 		getTodoList();
 	});
+	//오늘 날짜 구하기
+	var now = new Date();
+	var year= now.getFullYear();
+	var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
+	var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
+	var now_date = year + '-' + mon + '-' + day;
 	
 	var list = '';
 	var list2 = '';
@@ -135,12 +141,16 @@
 						if (item.todo_check == "0") {
 							list += '<tr>';
 							list += '<td>' 
-									+ '<div id="todo_title">제목 : ' + item.todo_title + '</div>'
-									+ '<div id="todo_content">내용 : ' + item.todo_content + '</div>' 
+								 	+ '<div id="todo_title">제목 : ' + item.todo_title + '</div>'
+								 	+ '<div id="todo_content">내용 : ' + item.todo_content + '</div>' 
 									+ '<div id="todo_rank">우선순위 : ' + item.todo_rank + '</div>'
-									+ '<div id="todo_date">작성날짜 : ' + item.todo_date + '</div>'
-									+ '<div id="todo_deadline">마감기간 : ' + item.todo_deadline + '</div>'
-									+ '<button id="todoOutputModalBtn' + item.todo_idx + '" class="btn btn-info" onclick="todoOutputModal(' + item.todo_idx + ')" data-toggle="modal" data-target="#todoUpdateModal">수정</button>'
+								 	+ '<div id="todo_date">작성날짜 : ' + item.todo_date + '</div>';
+							if(now_date > item.todo_deadline){
+								list += '<div id="todo_deadline" style="color: red;">마감기간 : ' + item.todo_deadline + '</div>';	
+							} else {
+								list += '<div id="todo_deadline">마감기간 : ' + item.todo_deadline + '</div>';
+							}
+								list += '<button id="todoOutputModalBtn' + item.todo_idx + '" class="btn btn-info" onclick="todoOutputModal(' + item.todo_idx + ')" data-toggle="modal" data-target="#todoUpdateModal">수정</button>'
 									+ '<button id="todoDeleteBtn' + item.todo_idx + '" class="btn btn-danger" onclick="todoDelete(' + item.todo_idx + ')">삭제</button>'
 									+ '<button id="todoMoveBtn' + item.todo_idx + '" class="btn btn-secondary" onclick="todoMove(' + item.todo_idx + ')">진행</button>'
 									+ '</td>';
@@ -150,28 +160,35 @@
 						if (item.todo_check == "1") {
 							list2 += '<tr>';
 							list2 += '<td>' 
-									+ '<div id="todo_title">제목 : ' + item.todo_title + '</div>'
-									+ '<div id="todo_content">내용 : ' + item.todo_content + '</div>' 
+								 	+ '<div id="todo_title">제목 : ' + item.todo_title + '</div>'
+								 	+ '<div id="todo_content">내용 : ' + item.todo_content + '</div>' 
 									+ '<div id="todo_rank">우선순위 : ' + item.todo_rank + '</div>'
-									+ '<div id="todo_date">작성날짜 : ' + item.todo_date + '</div>'
-									+ '<div id="todo_deadline">마감기간 : ' + item.todo_deadline + '</div>'
-									+ '<button id="todoOutputModalBtn' + item.todo_idx + '" class="btn btn-info" onclick="todoOutputModal(' + item.todo_idx + ')" data-toggle="modal" data-target="#todoUpdateModal">수정</button>'
+								 	+ '<div id="todo_date">작성날짜 : ' + item.todo_date + '</div>';
+							if(now_date > item.todo_deadline){
+								list2 += '<div id="todo_deadline" style="color: red;">마감기간 : ' + item.todo_deadline + '</div>';	
+							} else {
+								list2 += '<div id="todo_deadline">마감기간 : ' + item.todo_deadline + '</div>';
+							}
+								list2 += '<button id="todoOutputModalBtn' + item.todo_idx + '" class="btn btn-info" onclick="todoOutputModal(' + item.todo_idx + ')" data-toggle="modal" data-target="#todoUpdateModal">수정</button>'
 									+ '<button id="todoDeleteBtn' + item.todo_idx + '" class="btn btn-danger" onclick="todoDelete(' + item.todo_idx + ')">삭제</button>'
 									+ '<button id="todoMoveBtn' + item.todo_idx + '" class="btn btn-secondary" onclick="todoMove(' + item.todo_idx + ')">완료</button>'
 									+ '</td>';
 							list2 += '</tr>';
-							
 						}
 						//완료 테이블
 						if (item.todo_check == "2") {
 							list3 += '<tr>';
 							list3 += '<td>' 
-									+ '<div id="todo_title">제목 : ' + item.todo_title + '</div>'
-									+ '<div id="todo_content">내용 : ' + item.todo_content + '</div>' 
+								 	+ '<div id="todo_title">제목 : ' + item.todo_title + '</div>'
+								 	+ '<div id="todo_content">내용 : ' + item.todo_content + '</div>' 
 									+ '<div id="todo_rank">우선순위 : ' + item.todo_rank + '</div>'
-									+ '<div id="todo_date">작성날짜 : ' + item.todo_date + '</div>'
-									+ '<div id="todo_deadline">마감기간 : ' + item.todo_deadline + '</div>'
-									+ '<button id="todoOutputModalBtn' + item.todo_idx + '" class="btn btn-info" onclick="todoOutputModal(' + item.todo_idx + ')" data-toggle="modal" data-target="#todoUpdateModal">수정</button>'
+								 	+ '<div id="todo_date">작성날짜 : ' + item.todo_date + '</div>';
+							if(now_date > item.todo_deadline){
+								list3 += '<div id="todo_deadline" style="color: red;">마감기간 : ' + item.todo_deadline + '</div>';	
+							} else {
+								list3 += '<div id="todo_deadline">마감기간 : ' + item.todo_deadline + '</div>';
+							}
+								list3 += '<button id="todoOutputModalBtn' + item.todo_idx + '" class="btn btn-info" onclick="todoOutputModal(' + item.todo_idx + ')" data-toggle="modal" data-target="#todoUpdateModal">수정</button>'
 									+ '<button id="todoDeleteBtn' + item.todo_idx + '" class="btn btn-danger" onclick="todoDelete(' + item.todo_idx + ')">삭제</button>'
 									+ '</td>';
 							list3 += '</tr>';
