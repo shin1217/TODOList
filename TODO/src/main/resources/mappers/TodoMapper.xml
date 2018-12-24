@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.task.dao.TodoDAO">
+
+	<!-- todo 전체 출력 -->
+	<select id="todoSelectAll" resultType="todoVO">
+		select todo_idx, todo_title, todo_content, todo_rank, todo_deadline, todo_check, date_format(todo_date, '%Y-%m-%d') todo_date 
+		from todo_list 
+		order by todo_rank
+	</select>
+	
+	<!-- todo 선택 출력 -->
+	<select id="todoSelectPart" parameterType="int" resultType="todoVO">
+		select todo_idx, todo_title, todo_content, todo_rank, todo_deadline, todo_check, date_format(todo_date, '%Y-%m-%d') todo_date 
+		from todo_list 
+		where todo_idx = #{todo_idx}
+		order by todo_rank
+	</select>
+	
+	<!-- todo 등록 -->
+	<insert id="todoInsert" parameterType="todoVO" useGeneratedKeys="true" keyProperty="todo_idx">
+		insert into todo_list (todo_title, todo_content, todo_rank, todo_deadline)
+		values (#{todo_title}, #{todo_content}, #{todo_rank}, #{todo_deadline})
+	</insert>
+	
+	<!-- todo 삭제 -->
+	<delete id="todoDelete" parameterType="int">
+		delete from todo_list 
+		where todo_idx = #{todo_idx}
+	</delete>
+	
+	<!-- todo 수정 -->
+	<update id="todoUpdate" parameterType="todoVO">
+		update todo_list
+		set	todo_title = #{todo_title},
+			todo_content = #{todo_content},
+			todo_rank = #{todo_rank},
+			todo_deadline = #{todo_deadline}
+		where todo_idx = #{todo_idx};
+	</update>
+	
+	<!-- todo 이동 -->
+	<update id="todoUpdatePart" parameterType="int">
+		update todo_list
+		set todo_check = todo_check + 1
+		where todo_idx = #{todo_idx};
+	</update>
+</mapper>
